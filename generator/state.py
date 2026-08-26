@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional
 
+
 @dataclass
 class User:
     id: str
@@ -20,9 +21,11 @@ class Host:
     hostname: str
     ip_address: str
     host_type: str
-
     running_services: list[str] = field(default_factory=list)
     active_users: list[str] = field(default_factory=list)
+    running_processes: list[str] = field(default_factory=list)
+    files: list[str] = field(default_factory=list)
+
 
 @dataclass
 class Session:
@@ -33,6 +36,7 @@ class Session:
     active: bool = True
     started_at: Optional[datetime] = None
 
+
 @dataclass
 class NetworkConnection:
     source_ip: str
@@ -41,6 +45,7 @@ class NetworkConnection:
 
     protocol: str = "TCP"
     active: bool = True
+
 
 @dataclass
 class SimulationState:
@@ -51,15 +56,13 @@ class SimulationState:
 
     current_time: datetime = field(default_factory=datetime.now)
 
-    next_user_id: int = 1
-    next_host_id: int = 1
     next_session_id: int = 1
 
-    def add_user(self, user: User) -> None:
+    def add_user(self, user: User):
         self.users[user.id] = user
 
-    def add_host(self, host: Host) -> None:
+    def add_host(self, host: Host):
         self.hosts[host.id] = host
 
-    def add_session(self, session: Session) -> None:
+    def add_session(self, session: Session):
         self.sessions[session.id] = session

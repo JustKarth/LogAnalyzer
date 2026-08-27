@@ -1,7 +1,6 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
-
 
 @dataclass
 class User:
@@ -46,7 +45,6 @@ class NetworkConnection:
     protocol: str = "TCP"
     active: bool = True
 
-
 @dataclass
 class SimulationState:
     users: dict[str, User] = field(default_factory=dict)
@@ -54,7 +52,7 @@ class SimulationState:
     sessions: dict[str, Session] = field(default_factory=dict)
     connections: list[NetworkConnection] = field(default_factory=list)
 
-    current_time: datetime = field(default_factory=datetime.now)
+    current_time: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     next_session_id: int = 1
 

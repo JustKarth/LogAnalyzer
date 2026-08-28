@@ -20,7 +20,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE log_sources (
-    id SERIAL PRIMARY KEY,
+    id VARCHAR(100) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     type VARCHAR(100) NOT NULL,
     host VARCHAR(255),
@@ -33,7 +33,7 @@ CREATE TABLE log_sources (
 
 CREATE TABLE raw_logs (
     id BIGSERIAL PRIMARY KEY,
-    source_id INTEGER REFERENCES log_sources(id),
+    source_id VARCHAR(100) REFERENCES log_sources(id),
     received_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     raw_data JSONB NOT NULL
 );
@@ -41,7 +41,7 @@ CREATE TABLE raw_logs (
 CREATE TABLE events (
     id BIGSERIAL PRIMARY KEY,
     event_id UUID NOT NULL UNIQUE,
-    source_id INTEGER REFERENCES log_sources(id),
+    source_id VARCHAR(100) REFERENCES log_sources(id),
     timestamp TIMESTAMPTZ NOT NULL,
     event_type VARCHAR(100) NOT NULL,
     severity VARCHAR(50),

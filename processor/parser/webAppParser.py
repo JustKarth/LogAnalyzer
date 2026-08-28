@@ -2,8 +2,13 @@ import re
 
 
 def parse_web_app_log(raw_log: str) -> dict | None:
+    raw_log = raw_log.strip()
+
     match = re.match(
-        r'^(?P<timestamp>\S+) (?P<host>\S+) web: (?P<user>\S+) (?P<src_ip>\S+) "(?P<method>\S+) (?P<path>\S+) HTTP/\S+" (?P<status>\d+)$',
+        r'^(?P<timestamp>\S+) (?P<host>\S+) web: '
+        r'(?P<user>\S+) (?P<src_ip>\S+) '
+        r'"(?P<method>\S+) (?P<path>\S+) HTTP/\S+" '
+        r'(?P<status>\d+)$',
         raw_log
     )
 
@@ -25,7 +30,11 @@ def parse_web_app_log(raw_log: str) -> dict | None:
         "timestamp": match.group("timestamp"),
         "host": match.group("host"),
         "event_type": event_type,
-        "user": match.group("user") if match.group("user") != "-" else None,
+        "user": (
+            match.group("user")
+            if match.group("user") != "-"
+            else None
+        ),
         "src_ip": match.group("src_ip"),
         "method": match.group("method"),
         "path": match.group("path"),

@@ -1,6 +1,6 @@
 import random
 from actions import failed_login, login, execute_process
-from authenticationLogs import login_failure_log, login_success_log
+from authenticationLogs import login_success_log, login_failure_log
 from serverLogs import process_execution_log
 
 
@@ -13,20 +13,23 @@ def choose_attack_target(state):
 def brute_force_attack(state, user, host, attempts=5):
     events = []
 
-    if user.logged_in:
-        return events
-
     for _ in range(attempts):
         failed_login(state, user.id)
-        events.append(login_failure_log(user, host, state.current_time))
+        events.append(
+            login_failure_log(user, host, state.current_time)
+        )
 
     session = login(state, user.id, host.id)
 
-    if session:
-        events.append(login_success_log(user, host, state.current_time))
+    events.append(
+        login_success_log(user, host, state.current_time)
+    )
 
-        process = random.choice(["bash", "python", "ssh"])
-        execute_process(state, user.id, host.id, process)
-        events.append(process_execution_log(user, host, state.current_time, process))
+    process = random.choice(["bash", "python", "ssh"])
+    execute_process(state, user.id, host.id, process)
+
+    events.append(
+        process_execution_log(user, host, state.current_time, process)
+    )
 
     return events

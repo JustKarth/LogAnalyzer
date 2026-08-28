@@ -265,12 +265,8 @@ def main():
                 events = []
 
             for event in events:
-                event["timestamp"] = state.current_time.isoformat()
                 print_event(event)
-
-                state.current_time += timedelta(
-                    seconds=random.uniform(0.05, 0.5)
-                )
+                state.current_time += timedelta(seconds=random.uniform(0.05, 0.5))
 
         else:
             event = generate_event(state)

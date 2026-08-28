@@ -2,8 +2,8 @@ import json
 import sys
 
 
-def print_event(event: dict) -> None:
-    print(json.dumps(event), flush=True)
+def print_event(event: str) -> None:
+    print(event, flush=True)
 
 
 def write_event(event: dict, file) -> None:

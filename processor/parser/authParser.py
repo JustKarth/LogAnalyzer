@@ -1,11 +1,7 @@
 import re
 
 
-<<<<<<< HEAD
-def parse_auth_log(raw_log: str) -> dict:
-=======
 def parse_auth_log(raw_log: str) -> dict | None:
->>>>>>> origin/main
     patterns = [
         (
             "LOGIN_SUCCESS",
@@ -38,15 +34,10 @@ def parse_auth_log(raw_log: str) -> dict | None:
         ),
     ]
 
-<<<<<<< HEAD
-    for event_type, pattern in patterns:
-        match = pattern.match(raw_log.strip())
-=======
     raw_log = raw_log.strip()
 
     for event_type, pattern in patterns:
         match = pattern.match(raw_log)
->>>>>>> origin/main
 
         if match:
             data = match.groupdict()
@@ -56,22 +47,9 @@ def parse_auth_log(raw_log: str) -> dict | None:
                 "event_type": event_type,
                 "user": data.get("user"),
                 "src_ip": data.get("src_ip"),
-<<<<<<< HEAD
-                "dst_ip": None,
-                "host": data.get("host"),
-                "message": raw_log,
-                "metadata": {
-                    "old_privilege": data.get("old_privilege"),
-                    "new_privilege": data.get("new_privilege")
-                }
-            }
-
-    raise ValueError(f"Unrecognized authentication log: {raw_log}")
-=======
                 "host": data.get("host"),
                 "old_privilege": data.get("old_privilege"),
                 "new_privilege": data.get("new_privilege")
             }
 
     return None
->>>>>>> origin/main

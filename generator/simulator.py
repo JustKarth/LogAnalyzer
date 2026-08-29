@@ -267,10 +267,7 @@ def main():
 
             for event in events:
                 print_event(event)
-<<<<<<< HEAD
-=======
                 publish_event(event)
->>>>>>> origin/main
                 state.current_time += timedelta(seconds=random.uniform(0.05, 0.5))
 
         else:

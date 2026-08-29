@@ -20,11 +20,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE log_sources (
-<<<<<<< HEAD
-    id SERIAL PRIMARY KEY,
-=======
     id VARCHAR(100) PRIMARY KEY,
->>>>>>> origin/main
     name VARCHAR(255) NOT NULL,
     type VARCHAR(100) NOT NULL,
     host VARCHAR(255),
@@ -37,11 +33,7 @@ CREATE TABLE log_sources (
 
 CREATE TABLE raw_logs (
     id BIGSERIAL PRIMARY KEY,
-<<<<<<< HEAD
-    source_id INTEGER REFERENCES log_sources(id),
-=======
     source_id VARCHAR(100) REFERENCES log_sources(id),
->>>>>>> origin/main
     received_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     raw_data JSONB NOT NULL
 );
@@ -49,11 +41,7 @@ CREATE TABLE raw_logs (
 CREATE TABLE events (
     id BIGSERIAL PRIMARY KEY,
     event_id UUID NOT NULL UNIQUE,
-<<<<<<< HEAD
-    source_id INTEGER REFERENCES log_sources(id),
-=======
     source_id VARCHAR(100) REFERENCES log_sources(id),
->>>>>>> origin/main
     timestamp TIMESTAMPTZ NOT NULL,
     event_type VARCHAR(100) NOT NULL,
     severity VARCHAR(50),
@@ -62,7 +50,8 @@ CREATE TABLE events (
     dst_ip INET,
     host VARCHAR(255),
     message TEXT,
-    metadata JSONB DEFAULT '{}'::JSONB
+    metadata JSONB NOT NULL DEFAULT '{}'::JSONB,
+    processed_for_detection BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE detection_rules (
@@ -85,7 +74,7 @@ CREATE TABLE detections (
     severity VARCHAR(50),
     risk_score INTEGER CHECK (risk_score >= 0 AND risk_score <= 100),
     detected_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    metadata JSONB DEFAULT '{}'::JSONB
+    metadata JSONB NOT NULL DEFAULT '{}'::JSONB
 );
 
 CREATE TABLE incidents (
@@ -112,7 +101,7 @@ CREATE TABLE audit_logs (
     target_type VARCHAR(100),
     target_id VARCHAR(255),
     timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    metadata JSONB DEFAULT '{}'::JSONB
+    metadata JSONB NOT NULL DEFAULT '{}'::JSONB
 );
 
 CREATE TABLE blockchain_records (
@@ -125,6 +114,7 @@ CREATE TABLE blockchain_records (
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Indexes
 CREATE INDEX idx_raw_logs_source_id ON raw_logs(source_id);
 CREATE INDEX idx_raw_logs_received_at ON raw_logs(received_at);
 CREATE INDEX idx_events_source_id ON events(source_id);
@@ -132,6 +122,7 @@ CREATE INDEX idx_events_timestamp ON events(timestamp);
 CREATE INDEX idx_events_event_type ON events(event_type);
 CREATE INDEX idx_events_src_ip ON events(src_ip);
 CREATE INDEX idx_events_dst_ip ON events(dst_ip);
+CREATE INDEX idx_events_processed ON events(processed_for_detection);
 CREATE INDEX idx_detections_event_id ON detections(event_id);
 CREATE INDEX idx_detections_rule_id ON detections(rule_id);
 CREATE INDEX idx_incident_events_event_id ON incident_events(event_id);

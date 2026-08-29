@@ -2,10 +2,6 @@ import re
 
 
 def parse_network_log(raw_log: str) -> dict | None:
-<<<<<<< HEAD
-    match = re.match(
-        r'^(?P<timestamp>\S+) firewall: (?P<action>ALLOW|BLOCK|PORT_ACCESS) (?P<protocol>\S+) (?P<src_ip>\S+) -> (?P<dst_ip>\S+):(?P<dst_port>\d+)$',
-=======
     raw_log = raw_log.strip()
 
     match = re.match(
@@ -14,7 +10,6 @@ def parse_network_log(raw_log: str) -> dict | None:
         r'(?P<protocol>\S+) '
         r'(?P<src_ip>\S+) -> '
         r'(?P<dst_ip>\S+):(?P<dst_port>\d+)$',
->>>>>>> origin/main
         raw_log
     )
 
@@ -37,15 +32,11 @@ def parse_network_log(raw_log: str) -> dict | None:
         }
 
     match = re.match(
-<<<<<<< HEAD
-        r'^(?P<timestamp>\S+) firewall: SUSPICIOUS (?P<protocol>\S+) (?P<src_ip>\S+) -> (?P<dst_ip>\S+):(?P<dst_port>\d+) \((?P<reason>.+)\)$',
-=======
         r'^(?P<timestamp>\S+) firewall: SUSPICIOUS '
         r'(?P<protocol>\S+) '
         r'(?P<src_ip>\S+) -> '
         r'(?P<dst_ip>\S+):(?P<dst_port>\d+) '
         r'\((?P<reason>.+)\)$',
->>>>>>> origin/main
         raw_log
     )
 

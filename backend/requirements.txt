@@ -1,3 +1,6 @@
-SQLAlchemy
+fastapi
+uvicorn
+sqlalchemy
 psycopg[binary]
+redis
 python-dotenv

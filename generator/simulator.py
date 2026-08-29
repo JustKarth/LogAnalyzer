@@ -11,6 +11,7 @@ from serverLogs import process_execution_log, file_access_log
 from webAppLogs import http_request_log, http_error_log, suspicious_request_log
 from networkLogs import allowed_connection_log, blocked_connection_log, suspicious_network_log
 from output import print_event
+from publisher import publish_event
 from scenarios import brute_force_attack, choose_attack_target
 
 def create_users(state: SimulationState, count: int):
@@ -266,6 +267,10 @@ def main():
 
             for event in events:
                 print_event(event)
+<<<<<<< HEAD
+=======
+                publish_event(event)
+>>>>>>> origin/main
                 state.current_time += timedelta(seconds=random.uniform(0.05, 0.5))
 
         else:
@@ -273,6 +278,7 @@ def main():
 
             if event is not None:
                 print_event(event)
+                publish_event(event)
 
         time.sleep(delay / args.speed)
 

@@ -1,8 +1,8 @@
 import logging
 from typing import List
 
-from app.detection.models import Detection
-from app.detection.rules.base import DetectionContext, DetectionRule
+from app.rules.models import Detection
+from app.rules.base import DetectionContext, DetectionRule
 
 logger = logging.getLogger(__name__)
 

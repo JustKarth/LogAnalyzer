@@ -2,7 +2,7 @@ import json
 from typing import Any
 import redis
 
-from app.detection.rules.base import DetectionContext
+from app.rules.base import DetectionContext
 
 
 class RedisDetectionContext(DetectionContext):

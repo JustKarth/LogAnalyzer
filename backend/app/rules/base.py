@@ -3,7 +3,7 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
-from app.detection.models import Detection
+from app.rules.models import Detection
 
 
 class DetectionContext(ABC):

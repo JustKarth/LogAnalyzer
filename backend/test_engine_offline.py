@@ -1,7 +1,15 @@
+import sys
+from pathlib import Path
+
+# Add the 'backend' folder to Python's module lookup paths
+backend_dir = Path(__file__).resolve().parent
+if str(backend_dir) not in sys.path:
+    sys.path.insert(0, str(backend_dir))
+
 from app.detection.engine import DetectionEngine
 from app.detection.in_memory_context import InMemoryDetectionContext
-from app.detection.rules.brute_force import BruteForceRule
-from app.detection.rules.port_scan import PortScanRule
+from app.rules.brute_force import BruteForceRule
+from app.rules.port_scan import PortScanRule
 
 # 1. Instantiate the mock in-memory context (No Redis needed!)
 context = InMemoryDetectionContext()

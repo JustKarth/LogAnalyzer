@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 import json
 from typing import Any, Dict, Tuple
 
-from app.detection.rules.base import DetectionContext
+from app.rules.base import DetectionContext
 
 
 class InMemoryDetectionContext(DetectionContext):

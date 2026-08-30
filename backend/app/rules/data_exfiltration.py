@@ -1,8 +1,8 @@
 from datetime import datetime, timezone
 import uuid
 
-from app.detection.models import Detection, DetectionSeverity
-from app.detection.rules.base import DetectionContext, DetectionRule
+from app.rules.models import Detection, DetectionSeverity
+from app.rules.base import DetectionContext, DetectionRule
 
 
 class PossibleDataExfiltrationRule(DetectionRule):

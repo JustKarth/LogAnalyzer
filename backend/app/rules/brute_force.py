@@ -1,8 +1,8 @@
 from datetime import datetime, timezone
 import uuid
 
-from app.detection.models import Detection, DetectionSeverity
-from app.detection.rules.base import DetectionContext, DetectionRule
+from app.rules.models import Detection, DetectionSeverity
+from app.rules.base import DetectionContext, DetectionRule
 
 
 class BruteForceRule(DetectionRule):
@@ -10,10 +10,11 @@ class BruteForceRule(DetectionRule):
     name = "Brute Force Login Attempt"
     description = "Triggers when threshold of failed logins from a single IP is exceeded within a time window."
 
-    def __init__(self, threshold: int = 5, window_seconds: int = 60):
-        self.threshold = threshold
+    # Renamed threshold -> failure_threshold
+    def __init__(self, failure_threshold: int = 5, window_seconds: int = 60):
+        self.threshold = failure_threshold
         self.window_seconds = window_seconds
-
+        
     def evaluate(self, event: dict, context: DetectionContext) -> Detection | None:
         # Check if the event is a login failure
         if event.get("event_type") != "LOGIN_FAILURE":

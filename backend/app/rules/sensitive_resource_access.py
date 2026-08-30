@@ -57,7 +57,10 @@ class SensitiveResourceAccessRule(DetectionRule):
         user = event.get("user")
         host = event.get("host", "unknown")
 
-        path = metadata.get("path")
+        # NOTE: this generator's FILE_ACCESS events use the key "file",
+        # not "path". Falling back to "path" too in case that key ever
+        # gets added later (e.g. a richer generator or a different source).
+        path = metadata.get("file") or metadata.get("path")
         resource_type = metadata.get("resource_type")
         action = metadata.get("action")
 

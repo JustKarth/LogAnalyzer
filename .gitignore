@@ -1,3 +1,6 @@
+# =========================
+# OS / System
+# =========================
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -5,37 +8,187 @@ Thumbs.db
 Thumbs.db:encryptable
 ehthumbs.db
 desktop.ini
+$RECYCLE.BIN/
+.Spotlight-V100/
+.Trashes/
 
+# =========================
+# IDE / Editors
+# =========================
 .idea/
 *.iml
-.vscode/
+.vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 .project
 .classpath
 .settings/
+*.sublime-project
 *.sublime-workspace
+*.swp
+*.swo
+*~
 
+# =========================
+# Environment / Secrets
+# =========================
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 *.pem
 *.key
+*.crt
 *.cert
+*.p12
+*.pfx
 *.secret
 secrets.json
+credentials.json
+credentials.*
+config.local.*
 
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-*.pid
-*.seed
-*.crash
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+*.egg-info/
+.eggs/
 
+# =========================
+# Node / JavaScript
+# =========================
+node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+# =========================
+# Build / Compiled Output
+# =========================
 dist/
 build/
 out/
 target/
+bin/
+obj/
+release/
+debug/
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.a
+*.lib
+*.exe
+*.app
+*.class
+*.jar
+*.war
+*.ear
+
+# =========================
+# Frontend / Framework Cache
+# =========================
 .cache/
+.parcel-cache/
+.turbo/
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
 .sass-cache/
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.pid
+*.seed
+*.pid.lock
+*.crash
+
+# =========================
+# Coverage / Test Reports
+# =========================
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+junit.xml
+
+# =========================
+# Temporary / Backup Files
+# =========================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+*.swp
+*.swo
+
+# =========================
+# Generated Data
+# =========================
+*.csv
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql.gz
+data/
+tmp/
+temp/
+
+# =========================
+# Docker / Local Runtime
+# =========================
+docker-compose.override.yml
+docker-compose.local.yml
+*.tar
+*.tar.gz
+*.tgz
+
+# =========================
+# Terraform / Infrastructure State
+# =========================
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# =========================
+# Local Machine Files
+# =========================
+*.local
+.local/

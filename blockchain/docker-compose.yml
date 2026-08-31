@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  blockchain-service:
+    build: ./service
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      - CONTRACT_ADDRESS=${CONTRACT_ADDRESS}
+      - RPC_URL=${RPC_URL}
+      - PRIVATE_KEY=${PRIVATE_KEY}
+      - API_KEY=${API_KEY}
+      - RATE_LIMIT_MAX=100
+      - RATE_LIMIT_WINDOW_MS=60000
+      - LOG_LEVEL=info
+      - ENABLE_METRICS=true
+    volumes:
+      - ./service/logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/api/v1/blockchain/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

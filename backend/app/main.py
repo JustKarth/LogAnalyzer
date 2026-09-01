@@ -14,11 +14,10 @@ from app.services.detection_service import process_unprocessed_events
 
 # --- Rule imports ---
 from app.rules.brute_force import BruteForceRule
-# TODO: confirm class names, then uncomment:
-# from app.rules.port_scan import <ClassName>
-# from app.rules.privilege_escalation import <ClassName>
-# from app.rules.data_exfiltration import <ClassName>
-# from app.rules.sensitive_resource_access import <ClassName>
+from app.rules.port_scan import PortScanRule
+from app.rules.privilege_escalation import PrivilegeEscalationRule
+from app.rules.data_exfiltration import PossibleDataExfiltrationRule
+from app.rules.sensitive_resource_access import SensitiveResourceAccessRule
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -34,11 +33,10 @@ engine = DetectionEngine(context=context)
 
 # --- Register rules ---
 engine.register_rule(BruteForceRule())
-# TODO: register once class names are confirmed:
-# engine.register_rule(<ClassName>())
-# engine.register_rule(<ClassName>())
-# engine.register_rule(<ClassName>())
-# engine.register_rule(<ClassName>())
+engine.register_rule(PortScanRule())
+engine.register_rule(PrivilegeEscalationRule())
+engine.register_rule(PossibleDataExfiltrationRule())
+engine.register_rule(SensitiveResourceAccessRule())
 
 
 def run_batch():
